@@ -33,7 +33,6 @@ function App() {
       {result ? (
         <div>
           <img src={result.url} alt="..." />
-          {/* <iframe src={result.url}></iframe> */}
           <h3 className="text-info">Name:{result.name}</h3>
           <h3 className="text-primary">Dob:{result.dob}</h3>
           <h3 className="text-secondary">Spouse:{result.spouse}</h3>
@@ -54,7 +53,6 @@ function App() {
                       <li key={ind} className="card mt-4">
                         {i}
                       </li>
-                      {/* <hr /> */}
                     </div>
                   );
                 })

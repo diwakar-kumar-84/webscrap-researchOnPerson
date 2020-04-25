@@ -6,7 +6,6 @@ var cors = require("cors");
 var app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-// var scrapRes;
 app.get("/search/:search", (req, res) => {
   console.log(req.params.search);
   const it = req.params.search;
@@ -15,9 +14,7 @@ app.get("/search/:search", (req, res) => {
   let second = o[1];
   var cfirst = first.charAt(0).toUpperCase() + first.slice(1);
   var csecond = second.charAt(0).toUpperCase() + second.slice(1);
-  // var sfirst = first.charAt(0).toLowerCase() + first.slice(1);
-  // var ssecond = second.charAt(0).toLowerCase() + second.slice(1);
-  // console.log(cfirst, csecond);
+
   // personal information
   (async () => {
     const browser = await puppeteer.launch();
@@ -31,8 +28,6 @@ app.get("/search/:search", (req, res) => {
     const data = await page.evaluate(() => {
       const images = document.querySelectorAll(".image");
       const urls = Array.from(images).map((v) => v.firstChild.src);
-      // return urls[0];
-      console.log(urls);
       const name = document.querySelector(".nickname").innerText;
       const dob = document.querySelector(".bday").innerText;
       const wife = Array.from(
@@ -43,20 +38,8 @@ app.get("/search/:search", (req, res) => {
       const about = aboutsel.map((a) => a.innerText);
       const profess = Array.from(document.querySelectorAll("p"));
       const professional = profess.map((a) => a.textContent);
-      // const res = Array.from(document.querySelector());
-      // const resident = res.map((a) => a.textContent);
-      // const wife = Array.from(document.querySelectorAll("a.mw-redirect"));
-      // const spouse = wife.map((a) => a.innerHTML);
 
       return [urls[0], name, dob, spouse, about[2], professional[3]];
-      // return {
-      //   url: urls[0],
-      //   name: name,
-      //   dob: dob,
-      //   spouse: spouse,
-      //   about: about[2],
-      //   professional: professional[3],
-      // };
     });
 
     //for Patent data
@@ -93,8 +76,7 @@ app.get("/search/:search", (req, res) => {
       patent: patentdata,
     };
 
-    console.log(obj);
-    // return obj;
+    // console.log(obj);
     res.send(obj);
   })();
 });
